@@ -1,3 +1,3 @@
-const launch = require('./launch');
+const user = require('./user');
 
-module.exports = [launch];
+module.exports = [user];
