@@ -21,6 +21,7 @@
     "prettier": "^2.2.1"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.6",
     "apollo-datasource-rest": "^0.9.6",
     "apollo-server": "^2.19.1",
     "apollo-server-express": "^2.19.1",

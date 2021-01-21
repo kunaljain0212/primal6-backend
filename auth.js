@@ -8,14 +8,15 @@ const issueTokens = async ({ id }) => {
   return token;
 };
 
-const getAuthUser = async (context, requiresAuth = false) => {
-  const header = context.headers.authorization;
+const getAuthUser = async (req) => {
+  const header = req.headers.authorization;
   if (header) {
-    const token = jwt.verify(header, JWT_SECRET);
-    const authUser = await Users.findById(token.id);
+    const data = jwt.verify(header, JWT_SECRET);
+    console.log(data);
+    const authUser = await Users.findById(data.id);
     if (!authUser) throw new AuthenticationError('User Authentication failed');
-    if (requiresAuth) return authUser;
-    return null;
+    console.log(authUser);
+    return authUser;
   }
   throw new AuthenticationError('User Authentication failed');
 };

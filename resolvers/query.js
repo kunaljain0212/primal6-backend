@@ -14,28 +14,30 @@ module.exports = {
       if (!user) throw new Error('Invalid Credentials!');
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch) throw new Error('Invalid Credentials');
-      const token = await issueTokens(user._id);
+      const token = await issueTokens(user);
       return { user, token };
     },
-    profile: async (_, args, { request }) => {
-      console.log(request.headers.authorization);
-      const authUser = await getAuthUser(true);
+    profile: async (_, args, { req }) => {
+      console.log(req);
+      const authUser = await getAuthUser(req);
+      if (!authUser) throw new Error('User not authenticated');
       return authUser;
     },
   },
   Mutation: {
     Register: async (_, { id, email, name, password, phone }) => {
       const savedperson = await Users.findOne({ email: email });
-      if (savedperson) throw new Error('User Already Exists!');
+      if (savedperson) throw new Error('Email Already Exists!');
       const hashedpass = await bcrypt.hash(password, 12);
       const user = new Users({
+        id,
         email,
         name,
         password: hashedpass,
         phone,
       });
       await user.save();
-      const token = await issueTokens({ id });
+      const token = await issueTokens(user);
       return { user, token };
     },
   },
