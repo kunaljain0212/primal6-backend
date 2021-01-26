@@ -2,6 +2,7 @@ const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
 const typeDefs = require('./typeDefs');
 const resolvers = require('./resolvers');
 const { MONGOURI } = require('./keys');
@@ -22,7 +23,13 @@ const server = new ApolloServer({
 });
 
 const app = express();
-app.use(cors());
-server.applyMiddleware({ app });
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: [/localhost/, /127\.0\.0\.1/, /0\.0\.0\.0/],
+    credentials: true,
+  })
+);
+server.applyMiddleware({ app, path: '/graphql', cors: false });
 
 app.listen({ port: 8000 }, () => console.log(`Now browse to http://localhost:8000${server.graphqlPath}`));

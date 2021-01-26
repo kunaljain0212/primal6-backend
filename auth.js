@@ -9,10 +9,9 @@ const issueTokens = async ({ id }) => {
 };
 
 const getAuthUser = async (req) => {
-  const header = req.headers.authorization;
+  const header = req.cookies.token;
   if (header) {
     const data = jwt.verify(header, JWT_SECRET);
-    console.log(data);
     const authUser = await Users.findById(data.id);
     if (!authUser) throw new AuthenticationError('User Authentication failed');
     console.log(authUser);

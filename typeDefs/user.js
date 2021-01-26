@@ -1,11 +1,6 @@
 const { gql } = require('apollo-server-express');
 
 module.exports = gql`
-  type Rocket {
-    rocket_id: String
-    rocket_name: String
-    rocket_type: String
-  }
   type User {
     id: ID!
     email: String!
@@ -20,7 +15,6 @@ module.exports = gql`
   }
   type Auth {
     user: User
-    token: String!
   }
   type Mutation {
     Register(email: String!, password: String!, name: String!, phone: String): Auth
