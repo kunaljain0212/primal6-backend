@@ -2,10 +2,36 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Server",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "author": "Primal6 Team",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-node": "^4.1.0",
+    "eslint-config-prettier": "^7.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.0",
+    "nodemon": "^2.0.6",
+    "prettier": "^2.2.1"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.3.6",
+    "apollo-datasource-rest": "^0.9.6",
+    "apollo-server": "^2.19.1",
+    "apollo-server-express": "^2.19.1",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "graphql": "^15.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.10"
+  }
 }
